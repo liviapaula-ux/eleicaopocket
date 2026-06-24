@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Executivo · Benefícios iFood 2026</title>
+<style>
+  /* ── Reset & Base ───────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red:    #EA1D2C;
+    --navy:   #1B2A3B;
+    --cream:  #F5F0EB;
+    --orange: #F5A330;
+    --white:  #FFFFFF;
+    --gray:   #F0EDE9;
+    --text:   #1B2A3B;
+    --muted:  #5A6A7A;
+    --border: #D9D0C7;
+  }
+
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--text);
+    background: var(--white);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 16px;
+  }
+
+  /* ── Cabeçalho ──────────────────────────────────────────── */
+  .doc-header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 12px 16px 10px;
+    border-radius: 6px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .doc-header h1 {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+  }
+  .doc-header .subtitle {
+    font-size: 10px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 3px;
+  }
+  .doc-header .badge {
+    background: var(--red);
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  /* ── Seções ─────────────────────────────────────────────── */
+  .section {
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border: 1px solid var(--border);
+  }
+
+  .section-header {
+    padding: 7px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-header .tag {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .section-header h2 {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+  }
+  .section-header .snapshot {
+    margin-left: auto;
+    font-size: 9px;
+    opacity: 0.7;
+    white-space: nowrap;
+  }
+
+  /* Eleição: navy */
+  .s-eleicao .section-header { background: var(--navy); color: var(--white); }
+  /* Pesquisa: vermelho */
+  .s-pesquisa .section-header { background: var(--red); color: var(--white); }
+  /* Saúde: laranja escuro */
+  .s-saude .section-header { background: #B35A10; color: var(--white); }
+
+  .section-body {
+    padding: 10px 12px;
+    background: var(--white);
+  }
+
+  /* ── Big Numbers ────────────────────────────────────────── */
+  .kpi-row {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .kpi-row-4 { grid-template-columns: repeat(4, 1fr); }
+  .kpi-row-3 { grid-template-columns: repeat(3, 1fr); }
+
+  .kpi-card {
+    background: var(--cream);
+    border-radius: 5px;
+    padding: 8px 10px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .kpi-card .num {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+  .kpi-card .num.red { color: var(--red); }
+  .kpi-card .num.navy { color: var(--navy); }
+  .kpi-card .num.orange { color: var(--orange); }
+  .kpi-card .label {
+    font-size: 9px;
+    color: var(--muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+  .kpi-card .sub {
+    font-size: 9px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .kpi-card .delta {
+    font-size: 9px;
+    font-weight: 700;
+    color: #1A7A3B;
+    margin-top: 1px;
+  }
+
+  /* ── Sub-linha de contexto ──────────────────────────────── */
+  .context-bar {
+    background: #E8F4EC;
+    border: 1px solid #B8DEC5;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 9.5px;
+    color: #1A5A30;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .context-bar span strong { font-weight: 700; }
+
+  /* ── Tabelas compactas ──────────────────────────────────── */
+  .tables-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .compact-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+  }
+  .compact-table caption {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--muted);
+    text-align: left;
+    padding-bottom: 4px;
+  }
+  .compact-table th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 4px 6px;
+    text-align: left;
+    font-size: 9px;
+    font-weight: 600;
+  }
+  .compact-table th.right, .compact-table td.right { text-align: right; }
+  .compact-table td {
+    padding: 3px 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .compact-table tr:nth-child(even) td { background: var(--gray); }
+  .compact-table tr:last-child td { border-bottom: none; }
+
+  /* Tabela Pesquisa: cabeçalho vermelho */
+  .s-pesquisa .compact-table th { background: var(--red); }
+  /* Tabela Saúde: cabeçalho laranja escuro */
+  .s-saude .compact-table th { background: #B35A10; }
+
+  /* ── Notas e bullets ────────────────────────────────────── */
+  .note {
+    font-size: 9.5px;
+    color: var(--muted);
+    padding: 5px 8px;
+    background: var(--gray);
+    border-left: 3px solid var(--orange);
+    border-radius: 0 4px 4px 0;
+    margin-top: 8px;
+  }
+
+  .bullets {
+    margin: 8px 0 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .bullets li {
+    font-size: 10px;
+    padding: 3px 0 3px 14px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+  }
+  .bullets li:last-child { border-bottom: none; }
+  .bullets li::before {
+    content: "▶";
+    position: absolute;
+    left: 0;
+    color: var(--orange);
+    font-size: 7px;
+    top: 5px;
+  }
+
+  /* Alert Gen Z */
+  .alert {
+    background: #FFF3CD;
+    border: 1px solid #FFCC66;
+    border-radius: 4px;
+    padding: 5px 8px;
+    font-size: 9.5px;
+    color: #7A5900;
+    margin-top: 8px;
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+  }
+  .alert .icon { font-size: 12px; flex-shrink: 0; }
+
+  /* Insights Saúde */
+  .insight-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .insight-card {
+    background: var(--gray);
+    border-radius: 5px;
+    padding: 7px 9px;
+    border: 1px solid var(--border);
+    border-top: 3px solid #B35A10;
+  }
+  .insight-card .ins-num {
+    font-size: 16px;
+    font-weight: 800;
+    color: #B35A10;
+    line-height: 1.1;
+  }
+  .insight-card .ins-pct {
+    font-size: 10px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .insight-card .ins-label {
+    font-size: 9px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* ── Top benefícios ─────────────────────────────────────── */
+  .top-benefits {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .benefit-chip {
+    background: var(--red);
+    color: var(--white);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 9px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .benefit-chip .rank {
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+  }
+
+  /* ── Rodapé ─────────────────────────────────────────────── */
+  footer {
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8.5px;
+    color: var(--muted);
+  }
+  footer .conf {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    color: var(--red);
+  }
+  footer .conf::before {
+    content: "🔒";
+    font-size: 10px;
+  }
+
+  /* ── @media print ───────────────────────────────────────── */
+  @media print {
+    @page {
+      size: A4;
+      margin: 10mm 10mm 12mm 10mm;
+    }
+
+    body {
+      max-width: 100%;
+      padding: 0;
+      font-size: 10px;
+    }
+
+    .section { break-inside: avoid; }
+
+    .kpi-card .num { font-size: 18px; }
+
+    footer { break-inside: avoid; }
+
+    /* Garantir cores na impressão */
+    .section-header,
+    .compact-table th,
+    .benefit-chip,
+    .kpi-card .num.red,
+    .kpi-card .num.navy,
+    .kpi-card .num.orange {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ CABEÇALHO ══════════════════════════════════════════════════ -->
+<header class="doc-header">
+  <div>
+    <h1>Painel Executivo · Benefícios iFood 2026</h1>
+    <div class="subtitle">Consolidado executivo — Eleição Geral · Pesquisa de Benefícios · Saúde iDoc</div>
+  </div>
+  <div class="badge">Jun/2026</div>
+</header>
+
+<!-- ══ SEÇÃO 1 — ELEIÇÃO GERAL 2026 ═══════════════════════════════ -->
+<div class="section s-eleicao">
+  <div class="section-header">
+    <div>
+      <div class="tag">Seção 1</div>
+      <h2>Eleição Geral 2026</h2>
+    </div>
+    <span class="snapshot">Snapshot: 23/06/2026 · 16h</span>
+  </div>
+  <div class="section-body">
+
+    <!-- Big Numbers -->
+    <div class="kpi-row kpi-row-4">
+      <div class="kpi-card">
+        <div class="num navy">7.533</div>
+        <div class="label">FoodLovers Ativos</div>
+        <div class="sub">Base RH 22/06</div>
+      </div>
+      <div class="kpi-card">
+        <div class="num red">4.801</div>
+        <div class="label">Concluíram a Eleição</div>
+        <div class="sub">Taxa de conclusão</div>
+        <div class="delta">✓ 63,7%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="num navy">7.531</div>
+        <div class="label">Titulares em 23/06</div>
+        <div class="delta">▲ +81 vs 12/06</div>
+        <div class="sub">2025: 7.070 (+6,5%)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="num navy">6.337</div>
+        <div class="label">Dependentes em 23/06</div>
+        <div class="delta">▲ +125 vs 12/06</div>
+        <div class="sub">6.212 em 12/06</div>
+      </div>
+    </div>
+
+    <!-- Contexto -->
+    <div class="context-bar">
+      <span><strong>619</strong> titulares mudaram de plano</span>
+      <span>Saúde: <strong>246</strong> mudanças</span>
+      <span>Odonto: <strong>417</strong> mudanças</span>
+      <span>Crescimento de titulares vs 2025: <strong>+6,5%</strong> (7.070 → 7.531)</span>
+    </div>
+
+    <!-- Tabelas -->
+    <div class="tables-row">
+      <!-- Adesão opcionais -->
+      <table class="compact-table">
+        <caption>Adesão — Benefícios Opcionais (23/06)</caption>
+        <thead>
+          <tr><th>Benefício</th><th class="right">Titulares</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Mobilidade</td><td class="right">956</td></tr>
+          <tr><td>Pet</td><td class="right">643</td></tr>
+          <tr><td>Cultura</td><td class="right">633</td></tr>
+          <tr><td>Farmácia</td><td class="right">387</td></tr>
+          <tr><td>Reembolso</td><td class="right">282</td></tr>
+          <tr><td>Idioma</td><td class="right">71</td></tr>
+          <tr><td>Viagem</td><td class="right">55</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Custos médios -->
+      <table class="compact-table">
+        <caption>Custos Médios (23/06)</caption>
+        <thead>
+          <tr><th>Benefício</th><th class="right">Média R$</th><th class="right">Mediana R$</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Saúde (titular)</td><td class="right">857,10</td><td class="right">785,59</td></tr>
+          <tr><td>Saúde (fam. completa)</td><td class="right">1.463,63</td><td class="right">785,59</td></tr>
+          <tr><td>Mobilidade</td><td class="right">196,40</td><td class="right">158,00</td></tr>
+          <tr><td>Reembolso</td><td class="right">148,25</td><td class="right">100,00</td></tr>
+          <tr><td>Farmácia</td><td class="right">73,19</td><td class="right">40,00</td></tr>
+          <tr><td>Pet</td><td class="right">78,29</td><td class="right">90,00</td></tr>
+          <tr><td>Cultura</td><td class="right">50,00</td><td class="right">50,00</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Nota dependentes -->
+    <div class="note">
+      <strong>Dependentes de Saúde:</strong>
+      37% dos titulares têm ao menos 1 dependente · Média geral: <strong>0,65 dep/titular</strong> · Entre quem tem: <strong>1,75 dep/titular</strong> · Total de dependentes saúde: 4.870
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ SEÇÃO 2 — PESQUISA DE BENEFÍCIOS 2026 ══════════════════════ -->
+<div class="section s-pesquisa">
+  <div class="section-header">
+    <div>
+      <div class="tag">Seção 2</div>
+      <h2>Pesquisa de Benefícios 2026</h2>
+    </div>
+    <span class="snapshot">3º ano consecutivo de crescimento</span>
+  </div>
+  <div class="section-body">
+
+    <!-- Big Numbers -->
+    <div class="kpi-row kpi-row-3">
+      <div class="kpi-card">
+        <div class="num red">2.083</div>
+        <div class="label">Respondentes</div>
+        <div class="sub">Taxa de resposta: 27,8%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="num red">93,2%</div>
+        <div class="label">Aprovação Beneflex</div>
+        <div class="sub">59,2% Avaliação Excelente</div>
+      </div>
+      <div class="kpi-card">
+        <div class="num red">86,1%</div>
+        <div class="label">Aprovação Pacote Geral</div>
+        <div class="sub">45,6% Avaliação Excelente</div>
+      </div>
+    </div>
+
+    <div class="tables-row">
+      <!-- Top benefícios essenciais -->
+      <div>
+        <table class="compact-table">
+          <caption>Top Benefícios Essenciais (ranking)</caption>
+          <thead>
+            <tr><th>#</th><th>Benefício</th><th class="right">Destaque</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1º</td><td>Saúde</td><td class="right">—</td></tr>
+            <tr><td>2º</td><td>VR / VA</td><td class="right">—</td></tr>
+            <tr><td>3º</td><td>Idiomas</td><td class="right">52%</td></tr>
+            <tr><td>4º</td><td>Vida</td><td class="right">50%</td></tr>
+          </tbody>
+        </table>
+        <div class="note" style="margin-top:6px;">
+          <strong>Top Parceria:</strong> Modelo Híbrido Flexível (1º lugar)
+        </div>
+      </div>
+
+      <!-- Destaques qualitativos -->
+      <div>
+        <table class="compact-table">
+          <caption>Comentários Qualitativos</caption>
+          <thead>
+            <tr><th>Tema</th><th class="right">% dos coment.</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>VR / VA</td><td class="right">51,2%</td></tr>
+            <tr><td>Flexibilidade</td><td class="right">31,5%</td></tr>
+          </tbody>
+        </table>
+        <div class="note" style="margin-top:6px;">
+          463 comentários qualitativos (22,2% dos respondentes)
+        </div>
+      </div>
+    </div>
+
+    <div class="alert">
+      <span class="icon">⚠️</span>
+      <span><strong>Atenção — Geração Z:</strong> menor aprovação e menor taxa de participação entre todas as faixas etárias. Requer atenção estratégica de engajamento e adequação da oferta.</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ SEÇÃO 3 — SAÚDE iDOC 2026 ══════════════════════════════════ -->
+<div class="section s-saude">
+  <div class="section-header">
+    <div>
+      <div class="tag">Seção 3</div>
+      <h2>Saúde iDoc 2026</h2>
+    </div>
+    <span class="snapshot">Respondentes únicos deduplicados</span>
+  </div>
+  <div class="section-body">
+
+    <!-- Big Numbers -->
+    <div class="kpi-row kpi-row-3">
+      <div class="kpi-card">
+        <div class="num orange">1.790</div>
+        <div class="label">Respondentes Únicos</div>
+        <div class="sub">Após deduplicação</div>
+      </div>
+      <div class="kpi-card">
+        <div class="num orange">8,18</div>
+        <div class="label">Score Médio NPS-Saúde</div>
+        <div class="sub">Escala de 0 a 10</div>
+      </div>
+      <div class="kpi-card">
+        <div class="num red">121</div>
+        <div class="label">Score ≤ 6 (Detratores)</div>
+        <div class="sub">5,7% dos respondentes</div>
+      </div>
+    </div>
+
+    <!-- Insights -->
+    <div class="insight-row">
+      <div class="insight-card">
+        <div class="ins-num">605</div>
+        <div class="ins-pct">28,3% dos respondentes</div>
+        <div class="ins-label">Nunca usaram o iDoc — oportunidade de ativação</div>
+      </div>
+      <div class="insight-card">
+        <div class="ins-num">924</div>
+        <div class="ins-pct">43,3% dos respondentes</div>
+        <div class="ins-label">Querem Check-up Eyecare — alta demanda latente</div>
+      </div>
+      <div class="insight-card">
+        <div class="ins-num">19</div>
+        <div class="ins-pct">Possíveis PCDs</div>
+        <div class="ins-label">Identificados para acompanhamento — ação de inclusão</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ RODAPÉ ═══════════════════════════════════════════════════════ -->
+<footer>
+  <div class="conf">Confidencial · Benefícios | People · iFood · Jun/2026</div>
+  <div>Snapshot: 23/06/2026 · Dados: Eleição 2026, Pesquisa Benefícios 2026, Saúde iDoc 2026</div>
+</footer>
+
+</body>
+</html>
