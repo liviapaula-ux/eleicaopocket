@@ -383,6 +383,143 @@
     border-radius: 3px;
   }
 
+
+  /* ── Quadro Upgrade/Downgrade ───────────────────────────── */
+  .updown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .updown-card {
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .updown-card .ud-header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 5px 8px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .updown-card .ud-body {
+    background: var(--cream);
+    padding: 7px 9px;
+  }
+  .updown-card .ud-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 2px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 9.5px;
+  }
+  .updown-card .ud-row:last-child { border-bottom: none; }
+  .updown-card .ud-label { color: var(--muted); font-weight: 600; }
+  .updown-card .ud-val { font-weight: 800; font-size: 13px; }
+  .updown-card .ud-pct { font-size: 8.5px; color: var(--muted); margin-left: 2px; }
+  .ud-up   { color: #1A7A3B; }
+  .ud-down { color: var(--red); }
+  .ud-same { color: var(--muted); }
+  .ud-note {
+    font-size: 8.5px;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 5px;
+    text-align: center;
+  }
+
+.ud-detail-btn {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  background: none;
+  border: none;
+  font-size: 8px;
+  color: var(--muted);
+  cursor: pointer;
+  text-align: right;
+  padding: 0;
+  letter-spacing: 0.2px;
+}
+.ud-detail-btn:hover { color: var(--navy); text-decoration: underline; }
+.ud-detail-title {
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+.ud-detail-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 8.5px;
+  padding: 1.5px 0;
+  border-bottom: 1px solid var(--border);
+}
+.ud-detail-row:last-child { border-bottom: none; }
+.ud-detail-row .dr-label { color: var(--text); }
+.ud-detail-row .dr-val { font-weight: 700; color: var(--navy); }
+.ud-origin-note {
+  font-size: 8px;
+  color: var(--muted);
+  margin-top: 5px;
+  padding: 3px 5px;
+  background: var(--gray);
+  border-left: 2px solid var(--orange);
+  border-radius: 0 3px 3px 0;
+  line-height: 1.4;
+}
+
+/* ── Modal detalhe VA/VR ────────────────────────────────── */
+.ud-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(27,42,59,0.45);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+}
+.ud-modal-overlay.open {
+  display: flex;
+}
+.ud-modal-box {
+  background: var(--white);
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  padding: 14px 16px;
+  min-width: 240px;
+  max-width: 320px;
+  box-shadow: 0 8px 32px rgba(27,42,59,0.18);
+  position: relative;
+}
+.ud-modal-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: var(--muted);
+  cursor: pointer;
+  line-height: 1;
+}
+.ud-modal-close:hover { color: var(--red); }
+.ud-modal-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 10px;
+  padding-right: 16px;
+}
 </style>
 </head>
 <body>
@@ -427,13 +564,94 @@
       </div>
     </div>
 
-    <!-- Contexto -->
-    <div class="context-bar">
-      <span><strong>619</strong> foodlovers mudaram de plano</span>
-      <span>Saúde: <strong>246</strong> mudanças</span>
-      <span>Odonto: <strong>417</strong> mudanças</span>
-      <span>Crescimento de foodlovers vs 2025: <strong>+6,5%</strong> (7.070 → 7.531)</span>
+    <!-- Movimentação de Planos: Upgrades & Downgrades -->
+    <div class="updown-grid">
+
+      <!-- SAÚDE -->
+      <div class="updown-card">
+        <div class="ud-header">🏥 Saúde</div>
+        <div class="ud-body">
+          <div class="ud-row">
+            <span class="ud-label ud-up">▲ Upgrade</span>
+            <span class="ud-val ud-up">1,6%</span>
+          </div>
+          <div class="ud-row">
+            <span class="ud-label ud-down">▼ Downgrade</span>
+            <span class="ud-val ud-down">1,1%</span>
+          </div>
+          <div class="ud-row">
+            <span class="ud-label ud-same">→ Mantiveram</span>
+            <span class="ud-val ud-same">97,3%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ODONTO -->
+      <div class="updown-card">
+        <div class="ud-header">🦷 Odonto</div>
+        <div class="ud-body">
+          <div class="ud-row">
+            <span class="ud-label ud-up">▲ Upgrade</span>
+            <span class="ud-val ud-up">2,0%</span>
+          </div>
+          <div class="ud-row">
+            <span class="ud-label ud-down">▼ Downgrade</span>
+            <span class="ud-val ud-down">2,6%</span>
+          </div>
+          <div class="ud-row">
+            <span class="ud-label ud-same">→ Mantiveram</span>
+            <span class="ud-val ud-same">95,5%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIDA -->
+      <div class="updown-card">
+        <div class="ud-header">🛡️ Seguro de Vida</div>
+        <div class="ud-body">
+          <div class="ud-row">
+            <span class="ud-label ud-up">▲ Upgrade</span>
+            <span class="ud-val ud-up">5,0%</span>
+          </div>
+          <div class="ud-row">
+            <span class="ud-label ud-down">▼ Downgrade</span>
+            <span class="ud-val ud-down">3,5%</span>
+          </div>
+          <div class="ud-row">
+            <span class="ud-label ud-same">→ Mantiveram</span>
+            <span class="ud-val ud-same">91,6%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VA/VR -->
+      <div class="updown-card">
+        <div class="ud-header">🍽️ VA / VR</div>
+        <div class="ud-body">
+          <div class="ud-row">
+            <span class="ud-label ud-up">▲ Upgrade real</span>
+            <span class="ud-val ud-up">16,3%</span>
+          </div>
+          <div class="ud-row">
+            <span class="ud-label ud-down">▼ Downgrade</span>
+            <span class="ud-val ud-down">4,9%</span>
+          </div>
+          <div class="ud-row">
+            <span class="ud-label ud-same">→ Dissídio / sem mudança</span>
+            <span class="ud-val ud-same">78,8%</span>
+          </div>
+
+          <div style="font-size:8px; color:var(--muted); margin-top:4px; line-height:1.4;">
+            ¹ Upgrade real = aumentou além do reajuste anual de +33 pts (dissídio)
+          </div>
+
+          <button class="ud-detail-btn" onclick="openVaVrDetail()">detalhe ↗</button>
+        </div>
+      </div>
+
     </div>
+
+
 
     <!-- Tabelas -->
     <div class="tables-row" style="grid-template-columns: 1fr 1fr; gap: 16px; align-items: start;">
@@ -644,7 +862,7 @@
   <div class="section-header">
     <div>
       <div class="tag">Seção 3</div>
-      <h2>Saúde iDoc 2026</h2>
+      <h2>Pesquisa de saúde iDoc</h2>
     </div>
     <span class="snapshot">Respondentes únicos deduplicados</span>
   </div>
@@ -663,17 +881,16 @@
         <div class="sub">Escala de 0 a 10</div>
       </div>
       <div class="kpi-card">
-        <div class="num red">121</div>
-        <div class="label">Score ≤ 6 (Grupo Crítico)</div>
-        <div class="sub">5,7% dos respondentes</div>
+        <div class="num" style="color:#1A7A3B;">94%</div>
+        <div class="label">sinalizaram score de saúde acima de 7</div>
       </div>
     </div>
 
     <!-- Insights -->
     <div class="insight-row">
       <div class="insight-card">
-        <div class="ins-num">605</div>
-        <div class="ins-pct">28,3% dos respondentes</div>
+        <div class="ins-num">607</div>
+        <div class="ins-pct">28,4% dos respondentes</div>
         <div class="ins-label">Nunca usaram o iDoc — oportunidade de ativação</div>
       </div>
       <div class="insight-card">
@@ -716,43 +933,43 @@
           <text x="740" y="256" font-family="system-ui,sans-serif" font-size="7.5" fill="#9AA5B0" text-anchor="middle">700</text>
           <!-- Nunca usei: 607 -->
           <text x="216" y="36" font-family="system-ui,sans-serif" font-size="8" fill="#1B2A3B" text-anchor="end">Nunca usei</text>
-          <rect x="220" y="26" width="451" height="14" fill="#C24B00" rx="2"/>
+          <rect x="220" y="26" width="451" height="14" fill="#1B2A3B" rx="2"/>
           <text x="675" y="37" font-family="system-ui,sans-serif" font-size="8" fill="#5A6A7A">607</text>
           <!-- Plataforma de psicologia - Vittude: 205 -->
           <text x="216" y="58" font-family="system-ui,sans-serif" font-size="8" fill="#1B2A3B" text-anchor="end">Plataforma de psicologia - Vittude</text>
-          <rect x="220" y="48" width="152" height="14" fill="#E87C7C" rx="2"/>
+          <rect x="220" y="48" width="152" height="14" fill="#EA1D2C" rx="2"/>
           <text x="376" y="59" font-family="system-ui,sans-serif" font-size="8" fill="#5A6A7A">205</text>
           <!-- Telemedicina: 172 -->
           <text x="216" y="80" font-family="system-ui,sans-serif" font-size="8" fill="#1B2A3B" text-anchor="end">Telemedicina</text>
-          <rect x="220" y="70" width="128" height="14" fill="#F5C842" rx="2"/>
+          <rect x="220" y="70" width="128" height="14" fill="#F5A330" rx="2"/>
           <text x="352" y="81" font-family="system-ui,sans-serif" font-size="8" fill="#5A6A7A">172</text>
           <!-- Vacina da gripe: 160 -->
           <text x="216" y="102" font-family="system-ui,sans-serif" font-size="8" fill="#1B2A3B" text-anchor="end">Vacina da gripe</text>
-          <rect x="220" y="92" width="119" height="14" fill="#5CBFB4" rx="2"/>
+          <rect x="220" y="92" width="119" height="14" fill="#B35A10" rx="2"/>
           <text x="343" y="103" font-family="system-ui,sans-serif" font-size="8" fill="#5A6A7A">160</text>
           <!-- Acompanhamento nutricional: 152 -->
           <text x="216" y="124" font-family="system-ui,sans-serif" font-size="8" fill="#1B2A3B" text-anchor="end">Acompanhamento nutricional</text>
-          <rect x="220" y="114" width="113" height="14" fill="#4A90C4" rx="2"/>
+          <rect x="220" y="114" width="113" height="14" fill="#5A6A7A" rx="2"/>
           <text x="337" y="125" font-family="system-ui,sans-serif" font-size="8" fill="#5A6A7A">152</text>
           <!-- Psicólogos: 143 -->
           <text x="216" y="146" font-family="system-ui,sans-serif" font-size="8" fill="#1B2A3B" text-anchor="end">Psicólogos</text>
-          <rect x="220" y="136" width="106" height="14" fill="#7BAF6E" rx="2"/>
+          <rect x="220" y="136" width="106" height="14" fill="#1B2A3B" fill-opacity="0.7" rx="2"/>
           <text x="330" y="147" font-family="system-ui,sans-serif" font-size="8" fill="#5A6A7A">143</text>
           <!-- Pronto Atendimento Virtual: 140 -->
           <text x="216" y="168" font-family="system-ui,sans-serif" font-size="8" fill="#1B2A3B" text-anchor="end">Pronto Atendimento Virtual</text>
-          <rect x="220" y="158" width="104" height="14" fill="#D4D04A" rx="2"/>
+          <rect x="220" y="158" width="104" height="14" fill="#EA1D2C" fill-opacity="0.6" rx="2"/>
           <text x="328" y="169" font-family="system-ui,sans-serif" font-size="8" fill="#5A6A7A">140</text>
           <!-- Smart Checkup: 128 -->
           <text x="216" y="190" font-family="system-ui,sans-serif" font-size="8" fill="#1B2A3B" text-anchor="end">Smart Checkup</text>
-          <rect x="220" y="180" width="95" height="14" fill="#C4343A" rx="2"/>
+          <rect x="220" y="180" width="95" height="14" fill="#F5A330" fill-opacity="0.7" rx="2"/>
           <text x="319" y="191" font-family="system-ui,sans-serif" font-size="8" fill="#5A6A7A">128</text>
           <!-- Ifamily | Programa de Gestantes: 103 -->
           <text x="216" y="212" font-family="system-ui,sans-serif" font-size="8" fill="#1B2A3B" text-anchor="end">Ifamily | Programa de Gestantes</text>
-          <rect x="220" y="202" width="77" height="14" fill="#E8A0C0" rx="2"/>
+          <rect x="220" y="202" width="77" height="14" fill="#D9D0C7" rx="2"/>
           <text x="301" y="213" font-family="system-ui,sans-serif" font-size="8" fill="#5A6A7A">103</text>
           <!-- Médicos: 78 -->
           <text x="216" y="234" font-family="system-ui,sans-serif" font-size="8" fill="#1B2A3B" text-anchor="end">Médicos</text>
-          <rect x="220" y="224" width="58" height="14" fill="#E8A040" rx="2"/>
+          <rect x="220" y="224" width="58" height="14" fill="#B35A10" fill-opacity="0.6" rx="2"/>
           <text x="282" y="235" font-family="system-ui,sans-serif" font-size="8" fill="#5A6A7A">78</text>
         </svg>
     </div>
@@ -850,8 +1067,40 @@
 <!-- ══ RODAPÉ ═══════════════════════════════════════════════════════ -->
 <footer>
   <div class="conf">Confidencial · Benefícios | People · iFood · Jun/2026</div>
-  <div>Snapshot: 23/06/2026 · Dados: Eleição 2026, Pesquisa Benefícios 2026, Saúde iDoc 2026</div>
+  <div>Snapshot: 23/06/2026 · Dados: Eleição 2026, Pesquisa Benefícios 2026, Pesquisa de saúde iDoc</div>
 </footer>
 
+<script>
+function openVaVrDetail() {
+  document.getElementById('vavrModal').classList.add('open');
+}
+function closeVaVrDetail() {
+  document.getElementById('vavrModal').classList.remove('open');
+}
+</script>
+
+<!-- Modal detalhe VA/VR -->
+<div class="ud-modal-overlay" id="vavrModal" onclick="if(event.target===this)closeVaVrDetail()">
+  <div class="ud-modal-box">
+    <button class="ud-modal-close" onclick="closeVaVrDetail()">✕</button>
+    <div class="ud-modal-title">🍽️ VA/VR — Detalhamento de movimentação</div>
+
+    <div class="ud-detail-title">Upgrades reais · 16,3% dos titulares</div>
+    <div class="ud-detail-row"><span class="dr-label">+34 a +83 pts</span><span class="dr-val">46,9%</span></div>
+    <div class="ud-detail-row"><span class="dr-label">+84 a +133 pts</span><span class="dr-val">16,5%</span></div>
+    <div class="ud-detail-row"><span class="dr-label">+134 a +233 pts</span><span class="dr-val">10,8%</span></div>
+    <div class="ud-detail-row"><span class="dr-label">+234 a +533 pts</span><span class="dr-val">19,7%</span></div>
+    <div class="ud-detail-row"><span class="dr-label">+534+ pts</span><span class="dr-val">6,0%</span></div>
+
+    <div class="ud-detail-title" style="margin-top:10px;">Downgrades · 4,9% dos titulares</div>
+    <div class="ud-detail-row"><span class="dr-label">−1 a −50 pts</span><span class="dr-val">44,7%</span></div>
+    <div class="ud-detail-row"><span class="dr-label">−51 a −100 pts</span><span class="dr-val">15,3%</span></div>
+    <div class="ud-detail-row"><span class="dr-label">−101 a −200 pts</span><span class="dr-val">16,1%</span></div>
+    <div class="ud-detail-row"><span class="dr-label">−201 a −500 pts</span><span class="dr-val">20,5%</span></div>
+    <div class="ud-detail-row"><span class="dr-label">−500+ pts</span><span class="dr-val">3,5%</span></div>
+
+    <div class="ud-origin-note" style="margin-top:8px;">Upgrade real = escolheu além do reajuste anual de +33 pts (dissídio). Dissídio automático e sem mudança = 78,8% dos titulares.</div>
+  </div>
+</div>
 </body>
 </html>
