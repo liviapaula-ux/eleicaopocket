@@ -520,6 +520,51 @@
   margin-bottom: 10px;
   padding-right: 16px;
 }
+
+/* ── Blocos Feira ───────────────────────────────────────── */
+.feira-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+.feira-block {
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.feira-block .fb-header {
+  padding: 5px 8px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--white);
+  background: #2E6B3E;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.feira-block .fb-body {
+  background: var(--cream);
+  padding: 7px 9px;
+}
+.feira-block .fb-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 2px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 9px;
+}
+.feira-block .fb-row:last-child { border-bottom: none; }
+.feira-block .fb-label { color: var(--muted); }
+.feira-block .fb-val { font-weight: 800; color: var(--navy); font-size: 12px; }
+.feira-block .fb-sub {
+  font-size: 8px;
+  color: var(--muted);
+  margin-top: 1px;
+}
 </style>
 </head>
 <body>
@@ -995,63 +1040,81 @@
       <span>📅 <strong>16/06/2026</strong> — Feira de Benefícios iFood</span>
     </div>
 
-    <!-- Tabela completa de participação -->
-    <table class="compact-table" style="margin-bottom:8px;">
-      <caption>Participação por Parceiro / Stand — ordenado por total</caption>
-      <thead>
-        <tr>
-          <th style="background:#2E6B3E;">Parceiro / Stand</th>
-          <th class="right" style="background:#2E6B3E;">Presencial</th>
-          <th class="right" style="background:#2E6B3E;">Online</th>
-          <th class="right" style="background:#2E6B3E;">Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>AVUS — Quiz de Saúde</strong></td><td class="right">125</td><td class="right">304</td><td class="right"><strong>429</strong></td></tr>
-        <tr><td>Eyecare</td><td class="right">407</td><td class="right">—</td><td class="right"><strong>407</strong></td></tr>
-        <tr><td>Vidalink</td><td class="right">211</td><td class="right">207</td><td class="right"><strong>416</strong></td></tr>
-        <tr><td>Wellhub</td><td class="right">305</td><td class="right">—</td><td class="right"><strong>305</strong></td></tr>
-        <tr><td>NewValue</td><td class="right">111</td><td class="right">117</td><td class="right"><strong>228</strong></td></tr>
-        <tr><td>Stay (Previdência)</td><td class="right">93</td><td class="right">122</td><td class="right"><strong>215</strong></td></tr>
-        <tr><td>Leggal *</td><td class="right">72</td><td class="right">100</td><td class="right"><strong>172</strong></td></tr>
-        <tr><td>Meu Pet Club</td><td class="right">114 ativações</td><td class="right">—</td><td class="right"><strong>114</strong></td></tr>
-        <tr><td>Unimed CNU</td><td class="right">32 atend. + 48 pressão + 37 bioimpedância</td><td class="right">—</td><td class="right"><strong>117</strong></td></tr>
-        <tr><td>Bradesco Dental</td><td class="right">27 feedbacks</td><td class="right">—</td><td class="right"><strong>27</strong></td></tr>
-        <tr><td>iFood Benefícios</td><td class="right" colspan="2" style="text-align:center;">Ativação "Chute a Gol" + Canarinho Pistola</td><td class="right">—</td></tr>
-        <tr><td>Checkups (MAR Saúde / DazaCheck-up) **</td><td class="right">1</td><td class="right">—</td><td class="right"><strong>1</strong></td></tr>
-      </tbody>
-    </table>
+    <div class="feira-grid">
 
-    <!-- Destaques de conversão -->
-    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:#2E6B3E;margin-bottom:5px;margin-top:10px;">🎯 Destaques de Conversão</div>
-    <div class="insight-row" style="grid-template-columns:repeat(3,1fr);">
-      <div class="insight-card" style="border-top-color:#2E6B3E;">
-        <div class="ins-num" style="color:#2E6B3E;">407</div>
-        <div class="ins-pct" style="color:#2E6B3E;">Eyecare</div>
-        <div class="ins-label">Exames de visão realizados — apenas presencial</div>
+      <!-- SAÚDE -->
+      <div class="feira-block">
+        <div class="fb-header">🏥 Saúde</div>
+        <div class="fb-body">
+          <div class="fb-row">
+            <span class="fb-label">Unimed CNU — atendimentos</span>
+            <span class="fb-val">48</span>
+          </div>
+          <div class="fb-sub" style="margin-bottom:4px;">Canais, Prazos e Autorizações — presencial</div>
+          <div class="fb-row">
+            <span class="fb-label">Bradesco — cabine de exames</span>
+            <span class="fb-val">70</span>
+          </div>
+          <div class="fb-row" style="margin-top:4px;">
+            <span class="fb-label">👁️ Saúde ocular — Eyecare</span>
+            <span class="fb-val" style="color:#2E6B3E;">407</span>
+          </div>
+          <div class="fb-sub">Exames realizados — presencial e online</div>
+        </div>
       </div>
-      <div class="insight-card" style="border-top-color:#2E6B3E;">
-        <div class="ins-num" style="color:#2E6B3E;">12</div>
-        <div class="ins-pct" style="color:#2E6B3E;">Stay — Contratos Assinados</div>
-        <div class="ins-label">33 iniciaram adesão à previdência; 12 assinaram contrato</div>
+
+      <!-- STAY — Previdência -->
+      <div class="feira-block">
+        <div class="fb-header">🏦 Stay — Previdência Privada</div>
+        <div class="fb-body">
+          <div class="fb-row">
+            <span class="fb-label">Pessoas únicas interagiram</span>
+            <span class="fb-val">305</span>
+          </div>
+          <div class="fb-row">
+            <span class="fb-label">Formulário de adesão</span>
+            <span class="fb-val">122</span>
+          </div>
+          <div class="fb-row">
+            <span class="fb-label">Simulador dos Sonhos</span>
+            <span class="fb-val">205</span>
+          </div>
+          <div class="fb-row">
+            <span class="fb-label">Iniciaram adesão à previdência</span>
+            <span class="fb-val">33</span>
+          </div>
+          <div class="fb-row">
+            <span class="fb-label">✅ Assinaram contrato na feira</span>
+            <span class="fb-val" style="color:#2E6B3E;">12</span>
+          </div>
+        </div>
       </div>
-      <div class="insight-card" style="border-top-color:#2E6B3E;">
-        <div class="ins-num" style="color:#2E6B3E;">9</div>
-        <div class="ins-pct" style="color:#2E6B3E;">AVUS — Adesões ao Plano Família</div>
-        <div class="ins-label">7 com pagamento realizado; circulação de +150 pessoas no stand</div>
+
+      <!-- MEU PET CLUB -->
+      <div class="feira-block">
+        <div class="fb-header">🐾 Telemedicina Pet — Meu Pet Club</div>
+        <div class="fb-body" style="display:flex; align-items:center; gap:10px; padding:12px 9px;">
+          <div style="font-size:28px; font-weight:800; color:#2E6B3E; line-height:1;">114</div>
+          <div style="font-size:9px; color:var(--muted); line-height:1.4;">ativações realizadas<br>durante a Feira</div>
+        </div>
       </div>
-    </div>
-    <div class="insight-row" style="grid-template-columns:repeat(2,1fr);margin-top:6px;">
-      <div class="insight-card" style="border-top-color:#B35A10;">
-        <div class="ins-num" style="color:#B35A10;">110</div>
-        <div class="ins-pct" style="color:#B35A10;">Leggal — Cadastros Parciais</div>
-        <div class="ins-label">Iniciaram o cadastro mas não finalizaram (não incluídos no total de 172)</div>
+
+      <!-- AVUS -->
+      <div class="feira-block">
+        <div class="fb-header">🔍 Credencial de Saúde — Avus</div>
+        <div class="fb-body">
+          <div class="fb-row">
+            <span class="fb-label">Circularam pelo stand</span>
+            <span class="fb-val">~150</span>
+          </div>
+          <div class="fb-row">
+            <span class="fb-label">✅ Adesões durante a Feira</span>
+            <span class="fb-val" style="color:#2E6B3E;">9</span>
+          </div>
+          <div class="fb-sub">Pais e Agregados</div>
+        </div>
       </div>
-      <div class="insight-card" style="border-top-color:#5A6A7A;">
-        <div class="ins-num" style="color:#5A6A7A;">1</div>
-        <div class="ins-pct" style="color:#5A6A7A;">Checkups Finalizados na Feira</div>
-        <div class="ins-label">Demais abordados informaram que já haviam concluído anteriormente</div>
-      </div>
+
     </div>
 
     <!-- Footnote -->
@@ -1061,7 +1124,7 @@
       Wellhub, Eyecare, Unimed CNU, Bradesco Dental e Meu Pet Club: participação exclusivamente presencial.
     </div>
 
-  </div>
+</div>
 </div>
 
 <!-- ══ RODAPÉ ═══════════════════════════════════════════════════════ -->
