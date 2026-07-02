@@ -96,13 +96,10 @@
     white-space: nowrap;
   }
 
-  /* Eleição: navy */
+  /* Cores dos headers de seção */
   .s-eleicao .section-header { background: var(--navy); color: var(--white); }
-  /* Pesquisa: vermelho */
   .s-pesquisa .section-header { background: var(--red); color: var(--white); }
-  /* Saúde: laranja escuro */
   .s-saude .section-header { background: #B35A10; color: var(--white); }
-  /* Feira: verde */
   .s-feira .section-header { background: #2E6B3E; color: var(--white); }
 
   .section-body {
@@ -110,14 +107,14 @@
     background: var(--white);
   }
 
-  /* ── Big Numbers ────────────────────────────────────────── */
+  /* ── KPI Cards ──────────────────────────────────────────── */
   .kpi-row {
     display: grid;
     gap: 8px;
     margin-bottom: 10px;
   }
-  .kpi-row-4 { grid-template-columns: repeat(4, 1fr); }
   .kpi-row-3 { grid-template-columns: repeat(3, 1fr); }
+  .kpi-row-4 { grid-template-columns: repeat(4, 1fr); }
   .kpi-row-2 { grid-template-columns: repeat(2, 1fr); }
 
   .kpi-card {
@@ -135,7 +132,7 @@
   }
   .kpi-card .num.red { color: var(--red); }
   .kpi-card .num.navy { color: var(--navy); }
-  .kpi-card .num.orange { color: var(--orange); }
+  .kpi-card .num.orange { color: #B35A10; }
   .kpi-card .label {
     font-size: 9px;
     color: var(--muted);
@@ -156,18 +153,59 @@
     margin-top: 1px;
   }
 
-  /* ── Tabelas compactas ──────────────────────────────────── */
-  .tables-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 8px;
+  /* ── Subsection title ────────────────────────────────────── */
+  .subsection-title {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--navy);
+    margin-bottom: 6px;
+    margin-top: 10px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid var(--border);
   }
 
+  /* ── 4 cards compulsórios (ud4-grid) ─────────────────────── */
+  .ud4-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .ud4-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--navy);
+    border-radius: 4px;
+    padding: 7px 8px;
+  }
+  .ud4-card .ud4-title {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--navy);
+    margin-bottom: 5px;
+  }
+  .ud4-card .ud4-row {
+    font-size: 9.5px;
+    padding: 2px 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+  .ud4-card .ud4-row:last-child { border-bottom: none; }
+  .ud4-card .ud4-row .up { color: #1A7A3B; font-weight: 700; }
+  .ud4-card .ud4-row .down { color: var(--red); font-weight: 700; }
+  .ud4-card .ud4-row .neutral { color: var(--muted); }
+
+  /* ── Tabelas compactas ──────────────────────────────────── */
   .compact-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 10px;
+    margin-bottom: 8px;
   }
   .compact-table caption {
     font-size: 9px;
@@ -194,99 +232,182 @@
   .compact-table tr:nth-child(even) td { background: var(--gray); }
   .compact-table tr:last-child td { border-bottom: none; }
 
-  /* Tabela Pesquisa: cabeçalho vermelho */
   .s-pesquisa .compact-table th { background: var(--red); }
-  /* Tabela Saúde: cabeçalho laranja escuro */
   .s-saude .compact-table th { background: #B35A10; }
+  .s-feira .compact-table th { background: #2E6B3E; }
 
-  /* ── Sub-título de seção ──────────────────────────────────── */
-  .subsection-title {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    color: var(--muted);
-    margin: 12px 0 6px 0;
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  /* ── Ranking chips numerados ────────────────────────────── */
-  .ranking-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 8px;
-  }
-  .rank-chip {
-    background: var(--red);
-    color: var(--white);
-    border-radius: 20px;
-    padding: 4px 12px;
-    font-size: 9px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .rank-chip.orange { background: #B35A10; }
-  .rank-chip .rank-num {
-    background: rgba(255,255,255,0.3);
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 8px;
-    font-weight: 800;
-  }
-  .rank-chip .rank-label {
-    flex: 1;
-  }
-
-  /* ── Cards de geração ────────────────────────────────────── */
+  /* ── Gen cards (prevalência geracional) ─────────────────── */
   .gen-cards {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+    gap: 6px;
     margin-bottom: 10px;
   }
   .gen-card {
-    background: var(--cream);
+    background: var(--gray);
     border: 1px solid var(--border);
-    border-radius: 5px;
-    padding: 8px;
+    border-radius: 4px;
+    padding: 7px 8px;
   }
   .gen-card .gen-name {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    padding-bottom: 3px;
+    border-bottom: 2px solid var(--navy);
+  }
+  .gen-card .gen-item {
+    font-size: 9px;
+    color: var(--text);
+    padding: 2px 0;
+  }
+
+  /* ── Dependentes bar (dep-bar) ──────────────────────────── */
+  .dep-bar {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .dep-bar .dep-main {
     font-size: 10px;
     font-weight: 700;
     color: var(--navy);
-    margin-bottom: 4px;
+    white-space: nowrap;
   }
-  .gen-card .gen-benefits {
+  .dep-bar .dep-detail {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
     font-size: 9px;
     color: var(--muted);
-    line-height: 1.3;
   }
-  .gen-card .gen-benefits div {
-    padding: 1px 0;
+  .dep-bar .dep-detail span { white-space: nowrap; }
+  .dep-bar .dep-detail strong { color: var(--navy); font-weight: 700; }
+
+  /* ── Engajamento 4 cards (navy top border) ───────────────── */
+  .eng-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-bottom: 8px;
   }
-  .gen-card .gen-benefits .rank-num-inline {
-    display: inline-block;
-    background: var(--orange);
-    color: var(--white);
-    border-radius: 50%;
-    width: 14px;
-    height: 14px;
+  .eng-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--navy);
+    border-radius: 4px;
+    padding: 7px 8px;
     text-align: center;
-    line-height: 14px;
-    font-size: 8px;
-    font-weight: 700;
-    margin-right: 3px;
+  }
+  .eng-card .eng-num {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+  .eng-card .eng-label {
+    font-size: 8.5px;
+    color: var(--muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-top: 2px;
   }
 
-  /* ── Notas ─────────────────────────────────────────────── */
+  /* ── Ranking "O que valorizam" (vrank-*) ─────────────────── */
+  .vrank-wrap {
+    margin-bottom: 10px;
+  }
+  .vrank-sublabels {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .vrank-sublabel {
+    font-size: 8.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+  .vrank-sublabel.compulsorio {
+    background: var(--navy);
+    color: var(--white);
+  }
+  .vrank-sublabel.opcional {
+    background: var(--gray);
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .vrank-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .vrank-item {
+    background: var(--gray);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 6px 8px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .vrank-item.highlight {
+    background: #FAE8E0;
+    border-color: #F5C0A8;
+  }
+  .vrank-item.highlight-green {
+    background: #E6F4EA;
+    border-color: #A8D5B5;
+  }
+  .vrank-pct {
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1;
+    min-width: 32px;
+    text-align: right;
+  }
+  .vrank-pct.orange { color: #B35A10; }
+  .vrank-pct.red { color: var(--red); }
+  .vrank-name {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .vrank-delta {
+    font-size: 8.5px;
+    color: var(--muted);
+    margin-left: auto;
+    white-space: nowrap;
+  }
+  .vrank-legend {
+    font-size: 8.5px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .vrank-footnote {
+    font-size: 8.5px;
+    color: var(--muted);
+    margin-top: 4px;
+    padding: 3px 6px;
+    background: var(--gray);
+    border-radius: 3px;
+  }
+
+  /* ── Nota e footnote ─────────────────────────────────────── */
   .note {
     font-size: 9.5px;
     color: var(--muted);
@@ -295,6 +416,14 @@
     border-left: 3px solid var(--orange);
     border-radius: 0 4px 4px 0;
     margin-top: 8px;
+  }
+  .footnote {
+    font-size: 8.5px;
+    color: var(--muted);
+    margin-top: 4px;
+    padding: 4px 6px;
+    background: var(--gray);
+    border-radius: 3px;
   }
 
   /* ── Rodapé ─────────────────────────────────────────────── */
@@ -315,275 +444,16 @@
     font-weight: 600;
     color: var(--red);
   }
-  footer .conf::before {
-    content: "🔒";
-    font-size: 10px;
-  }
-
-
-  /* ── Dependentes — linha contínua ──────────────────────── */
-  .dep-bar {
-    background: var(--cream);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--navy);
-    border-radius: 0 5px 5px 0;
-    padding: 10px 16px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .dep-bar-main {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-  .dep-pct {
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--navy);
-    line-height: 1;
-  }
-  .dep-desc {
-    font-size: 10px;
-    color: var(--text);
-  }
-  .dep-delta {
-    font-size: 9px;
-    color: #1A7A3B;
-    font-weight: 700;
-    margin-left: 4px;
-  }
-  .dep-bar-dist {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
-    border-left: 1px solid var(--border);
-    padding-left: 16px;
-    flex: 1;
-    justify-content: space-evenly;
-  }
-  .dep-item {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    font-size: 9.5px;
-  }
-  .dep-cargo {
-    color: var(--muted);
-  }
-  .dep-val {
-    font-weight: 700;
-    color: var(--navy);
-  }
-  .dep-sep {
-    color: var(--border);
-    font-size: 11px;
-    margin: 0 1px;
-  }
-
-
-
-  /* ── Ranking "O que valorizam" — formato print ─────────── */
-  .vrank-wrap { margin-bottom: 10px; }
-  .vrank-header {
-    font-size: 9px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.7px;
-    color: var(--muted);
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 6px;
-  }
-  .vrank-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px 16px;
-    align-items: start;
-  }
-  /* coluna esquerda: itens em destaque (card salmon) */
-  .vrank-col-left { display: flex; flex-direction: column; gap: 3px; }
-  /* coluna direita: itens simples */
-  .vrank-col-right { display: flex; flex-direction: column; gap: 3px; }
-
-  /* card destacado */
-  .vrank-card {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: #F9DEDA;
-    border-radius: 4px;
-    padding: 5px 7px;
-    min-height: 28px;
-  }
-  .vrank-card.green { background: #E4F0E8; }
-  .vrank-icon {
-    width: 18px;
-    height: 18px;
-    border-radius: 3px;
-    background: var(--red);
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .vrank-icon.orange { background: #B35A10; }
-  .vrank-pct-badge {
-    display: flex;
-    align-items: baseline;
-    gap: 2px;
-    flex-shrink: 0;
-    min-width: 42px;
-  }
-  .vrank-arrow {
-    font-size: 7px;
-    color: #1A7A3B;
-    font-weight: 900;
-    line-height: 1;
-  }
-  .vrank-arrow.same { color: var(--muted); }
-  .vrank-pct-num {
-    font-size: 13px;
-    font-weight: 800;
-    color: var(--text);
-    line-height: 1;
-  }
-  .vrank-card-name {
-    font-size: 9px;
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1.25;
-    flex: 1;
-  }
-  .vrank-card-sub {
-    font-size: 7.5px;
-    color: var(--muted);
-    font-weight: 400;
-  }
-
-  /* linha simples (col direita) */
-  .vrank-plain {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 3px 2px;
-    border-bottom: 1px solid #EDE8E3;
-  }
-  .vrank-plain:last-child { border-bottom: none; }
-  .vrank-plain-pct {
-    font-size: 11px;
-    font-weight: 800;
-    color: var(--text);
-    min-width: 30px;
-    text-align: right;
-    flex-shrink: 0;
-  }
-  .vrank-plain-icon {
-    width: 12px;
-    height: 12px;
-    border-radius: 2px;
-    background: #C8B8B5;
-    flex-shrink: 0;
-  }
-  .vrank-plain-icon.orange { background: #C49A7A; }
-  .vrank-plain-name {
-    font-size: 9px;
-    color: var(--text);
-    line-height: 1.25;
-    flex: 1;
-  }
-  .vrank-plain-sub {
-    font-size: 7.5px;
-    color: var(--muted);
-    display: block;
-  }
-  .vrank-legend {
-    font-size: 7.5px;
-    color: var(--muted);
-    margin-top: 5px;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-  .vrank-legend span { display: flex; align-items: center; gap: 3px; }
-  .vrank-footnote {
-    font-size: 7.5px;
-    color: var(--muted);
-    margin-top: 4px;
-    font-style: italic;
-  }
-
-
-  /* ── 4 cards movimentação (estilo print) ────────────────── */
-  .ud4-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
-    margin-bottom: 10px;
-  }
-  .ud4-card {
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  .ud4-header {
-    background: var(--navy);
-    color: var(--white);
-    padding: 5px 8px;
-    font-size: 9px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .ud4-body { padding: 6px 8px; background: var(--cream); }
-  .ud4-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2.5px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 9px;
-  }
-  .ud4-row:last-child { border-bottom: none; }
-  .ud4-label { color: var(--muted); display: flex; align-items: center; gap: 3px; }
-  .ud4-val   { font-weight: 800; font-size: 10px; }
-  .ud4-up    { color: #1A7A3B; }
-  .ud4-dn    { color: var(--red); }
-  .ud4-eq    { color: var(--muted); }
-  .ud4-note  { font-size: 7px; color: var(--muted); margin-top: 4px; font-style: italic; line-height: 1.3; }
-
-
-  .vrank-sublabel-row { display:grid; grid-template-columns:1fr 1fr; gap:4px 16px; margin-bottom:3px; }
-  .vrank-sublabel { font-size:7.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); }
 
   /* ── @media print ───────────────────────────────────────── */
   @media print {
-    @page {
-      size: A4;
-      margin: 10mm 10mm 12mm 10mm;
-    }
-
-    body {
-      max-width: 100%;
-      padding: 0;
-      font-size: 10px;
-    }
-
+    @page { size: A4; margin: 10mm 10mm 12mm 10mm; }
+    body { max-width: 100%; padding: 0; font-size: 10px; }
     .section { break-inside: avoid; }
-
     .kpi-card .num { font-size: 18px; }
-
     footer { break-inside: avoid; }
-
-    /* Garantir cores na impressão */
     .section-header,
     .compact-table th,
-    .rank-chip,
     .kpi-card .num.red,
     .kpi-card .num.navy,
     .kpi-card .num.orange {
@@ -605,7 +475,7 @@
 </header>
 
 <!-- ══ SEÇÃO 1 — ELEIÇÃO GERAL 2026 ═══════════════════════════════ -->
-<div class="section s-eleicao">
+<div class="section s-eleicao" id="s-eleicao">
   <div class="section-header">
     <div>
       <div class="tag">Seção 1</div>
@@ -615,17 +485,17 @@
   </div>
   <div class="section-body">
 
-    <!-- Big Numbers Participação -->
+    <!-- KPIs -->
     <div class="kpi-row kpi-row-3">
       <div class="kpi-card">
         <div class="num navy">7.533</div>
         <div class="label">FoodLovers Ativos</div>
-        <div class="delta">2025: 7.070 foodlovers</div>
+        <div class="sub">2025: 7.070 foodlovers</div>
       </div>
       <div class="kpi-card">
         <div class="num red">64%</div>
         <div class="label">Concluíram a Eleição</div>
-        <div class="delta">▲ 1pp vs 2025 (63%)</div>
+        <div class="sub">▲ 1pp vs 2025 (63%)</div>
       </div>
       <div class="kpi-card">
         <div class="num navy">44%</div>
@@ -634,93 +504,39 @@
       </div>
     </div>
 
-    <!-- Movimentação benefícios compulsórios — 4 cards -->
+    <!-- Movimentação — Benefícios Compulsórios -->
     <div class="subsection-title">Movimentação — Benefícios Compulsórios</div>
     <div class="ud4-grid">
-
-      <!-- SAÚDE -->
       <div class="ud4-card">
-        <div class="ud4-header">Saúde</div>
-        <div class="ud4-body">
-          <div class="ud4-row">
-            <span class="ud4-label"><span class="ud4-up">▲</span> Upgrade</span>
-            <span class="ud4-val ud4-up">2%</span>
-          </div>
-          <div class="ud4-row">
-            <span class="ud4-label"><span class="ud4-dn">▼</span> Downgrade</span>
-            <span class="ud4-val ud4-dn">1%</span>
-          </div>
-          <div class="ud4-row">
-            <span class="ud4-label"><span class="ud4-eq">—</span> Sem alteração</span>
-            <span class="ud4-val ud4-eq">97%</span>
-          </div>
-        </div>
+        <div class="ud4-title">Saúde</div>
+        <div class="ud4-row"><span class="up">▲ Upgrade</span><span>2%</span></div>
+        <div class="ud4-row"><span class="down">▼ Downgrade</span><span>1%</span></div>
+        <div class="ud4-row"><span class="neutral">— Sem alteração</span><span>97%</span></div>
       </div>
-
-      <!-- ODONTO -->
       <div class="ud4-card">
-        <div class="ud4-header">Odonto</div>
-        <div class="ud4-body">
-          <div class="ud4-row">
-            <span class="ud4-label"><span class="ud4-up">▲</span> Upgrade</span>
-            <span class="ud4-val ud4-up">2%</span>
-          </div>
-          <div class="ud4-row">
-            <span class="ud4-label"><span class="ud4-dn">▼</span> Downgrade</span>
-            <span class="ud4-val ud4-dn">3%</span>
-          </div>
-          <div class="ud4-row">
-            <span class="ud4-label"><span class="ud4-eq">—</span> Sem alteração</span>
-            <span class="ud4-val ud4-eq">96%</span>
-          </div>
-        </div>
+        <div class="ud4-title">Odonto</div>
+        <div class="ud4-row"><span class="up">▲ Upgrade</span><span>2%</span></div>
+        <div class="ud4-row"><span class="down">▼ Downgrade</span><span>3%</span></div>
+        <div class="ud4-row"><span class="neutral">— Sem alteração</span><span>96%</span></div>
       </div>
-
-      <!-- SEGURO DE VIDA -->
       <div class="ud4-card">
-        <div class="ud4-header">Seguro de Vida</div>
-        <div class="ud4-body">
-          <div class="ud4-row">
-            <span class="ud4-label"><span class="ud4-up">▲</span> Upgrade</span>
-            <span class="ud4-val ud4-up">5%</span>
-          </div>
-          <div class="ud4-row">
-            <span class="ud4-label"><span class="ud4-dn">▼</span> Downgrade</span>
-            <span class="ud4-val ud4-dn">4%</span>
-          </div>
-          <div class="ud4-row">
-            <span class="ud4-label"><span class="ud4-eq">—</span> Sem alteração</span>
-            <span class="ud4-val ud4-eq">92%</span>
-          </div>
-        </div>
+        <div class="ud4-title">Seguro de Vida</div>
+        <div class="ud4-row"><span class="up">▲ Upgrade</span><span>5%</span></div>
+        <div class="ud4-row"><span class="down">▼ Downgrade</span><span>4%</span></div>
+        <div class="ud4-row"><span class="neutral">— Sem alteração</span><span>92%</span></div>
       </div>
-
-      <!-- VA / VR -->
       <div class="ud4-card">
-        <div class="ud4-header">VA / VR</div>
-        <div class="ud4-body">
-          <div class="ud4-row">
-            <span class="ud4-label"><span class="ud4-up">▲</span> Upgrade real</span>
-            <span class="ud4-val ud4-up">16%</span>
-          </div>
-          <div class="ud4-row">
-            <span class="ud4-label"><span class="ud4-dn">▼</span> Downgrade</span>
-            <span class="ud4-val ud4-dn">5%</span>
-          </div>
-          <div class="ud4-row">
-            <span class="ud4-label"><span class="ud4-eq">—</span> Sem alteração</span>
-            <span class="ud4-val ud4-eq">79%</span>
-          </div>
-        </div>
+        <div class="ud4-title">VA / VR</div>
+        <div class="ud4-row"><span class="up">▲ Upgrade real</span><span>16%</span></div>
+        <div class="ud4-row"><span class="down">▼ Downgrade</span><span>5%</span></div>
+        <div class="ud4-row"><span class="neutral">— Sem alteração</span><span>79%</span></div>
       </div>
-
     </div>
 
-    <!-- Benefícios opcionais -->
-    <div class="section-sub-title" style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.6px;color:var(--navy);margin-bottom:6px;">Benefícios Opcionais</div>
-
-    <table class="compact-table" style="margin-bottom: 10px;">
-      <caption>Benefícios Opcionais <span style="font-weight:400;color:var(--muted);">(38% dos FoodLovers possuem ao menos 1)</span></caption>
+    <!-- Benefícios Opcionais -->
+    <div class="subsection-title">Benefícios Opcionais</div>
+    <table class="compact-table">
+      <caption>Benefícios Opcionais (38% dos FoodLovers possuem ao menos 1)</caption>
       <thead>
         <tr>
           <th>Benefício</th>
@@ -730,114 +546,73 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Mobilidade</td>
-          <td class="right">3%</td>
-          <td class="right">11%</td>
-          <td class="right">14%</td>
-        </tr>
-        <tr>
-          <td>Pet</td>
-          <td class="right">4%</td>
-          <td class="right">23%</td>
-          <td class="right">24%</td>
-        </tr>
-        <tr>
-          <td>Cultura</td>
-          <td class="right">3%</td>
-          <td class="right">12%</td>
-          <td class="right">17%</td>
-        </tr>
-        <tr>
-          <td>Farmácia</td>
-          <td class="right">2%</td>
-          <td class="right">12%</td>
-          <td class="right">20%</td>
-        </tr>
-        <tr>
-          <td>Reembolso</td>
-          <td class="right">1%</td>
-          <td class="right">9%</td>
-          <td class="right">7%</td>
-        </tr>
+        <tr><td>Mobilidade</td><td class="right">3%</td><td class="right">11%</td><td class="right">14%</td></tr>
+        <tr><td>Pet</td><td class="right">4%</td><td class="right">23%</td><td class="right">24%</td></tr>
+        <tr><td>Cultura</td><td class="right">3%</td><td class="right">12%</td><td class="right">17%</td></tr>
+        <tr><td>Farmácia</td><td class="right">2%</td><td class="right">12%</td><td class="right">20%</td></tr>
+        <tr><td>Reembolso</td><td class="right">1%</td><td class="right">9%</td><td class="right">7%</td></tr>
       </tbody>
     </table>
 
-    <!-- Visão geracional da eleição (NOVA SEÇÃO) -->
-    <div class="subsection-title">Prevalência de benefícios opcionais por geração</div>
+    <!-- Prevalência por Geração -->
+    <div class="subsection-title">Prevalência de Benefícios Opcionais por Geração</div>
     <div class="gen-cards">
       <div class="gen-card">
         <div class="gen-name">Baby Boomers</div>
-        <div class="gen-benefits">
-          <div><span class="rank-num-inline">1</span>Mobilidade</div>
-        </div>
+        <div class="gen-item">1. Mobilidade</div>
       </div>
       <div class="gen-card">
         <div class="gen-name">Geração X</div>
-        <div class="gen-benefits">
-          <div><span class="rank-num-inline">1</span>Mobilidade</div>
-          <div><span class="rank-num-inline">2</span>Pet</div>
-          <div><span class="rank-num-inline">3</span>Farmácia</div>
-        </div>
+        <div class="gen-item">1. Mobilidade</div>
+        <div class="gen-item">2. Pet</div>
+        <div class="gen-item">3. Farmácia</div>
       </div>
       <div class="gen-card">
         <div class="gen-name">Millennials</div>
-        <div class="gen-benefits">
-          <div><span class="rank-num-inline">1</span>Mobilidade</div>
-          <div><span class="rank-num-inline">2</span>Pet</div>
-          <div><span class="rank-num-inline">3</span>Cultura &amp; Streaming</div>
-        </div>
+        <div class="gen-item">1. Mobilidade</div>
+        <div class="gen-item">2. Pet</div>
+        <div class="gen-item">3. Cultura &amp; Streaming</div>
       </div>
       <div class="gen-card">
         <div class="gen-name">Geração Z</div>
-        <div class="gen-benefits">
-          <div><span class="rank-num-inline">1</span>Mobilidade</div>
-          <div><span class="rank-num-inline">2</span>Cultura &amp; Streaming</div>
-          <div><span class="rank-num-inline">3</span>Pet</div>
-        </div>
+        <div class="gen-item">1. Mobilidade</div>
+        <div class="gen-item">2. Cultura &amp; Streaming</div>
+        <div class="gen-item">3. Pet</div>
       </div>
     </div>
 
-    <!-- Dependentes — linha contínua -->
+    <!-- Dependentes de Saúde -->
     <div class="subsection-title">Dependentes de Saúde</div>
     <div class="dep-bar">
-      <div class="dep-bar-main">
-        <span class="dep-pct">37%</span>
-        <span class="dep-desc">dos FoodLovers possuem dependentes <span class="dep-delta">▲ 2pp vs 2025 (35%)</span></span>
-      </div>
-      <div class="dep-bar-dist">
-        <span class="dep-item"><span class="dep-cargo">Operacional</span><span class="dep-val">40%</span></span>
-        <span class="dep-sep">·</span>
-        <span class="dep-item"><span class="dep-cargo">Espec/Coord</span><span class="dep-val">51%</span></span>
-        <span class="dep-sep">·</span>
-        <span class="dep-item"><span class="dep-cargo">Gerentes</span><span class="dep-val">60%</span></span>
-        <span class="dep-sep">·</span>
-        <span class="dep-item"><span class="dep-cargo">Heads</span><span class="dep-val">68%</span></span>
-        <span class="dep-sep">·</span>
-        <span class="dep-item"><span class="dep-cargo">Diretores</span><span class="dep-val">81%</span></span>
-        <span class="dep-sep">·</span>
-        <span class="dep-item"><span class="dep-cargo">VPs e CEO</span><span class="dep-val">100%</span></span>
+      <div class="dep-main">37% dos FoodLovers possuem dependentes &nbsp;▲ 2pp vs 2025 (35%)</div>
+      <div class="dep-detail">
+        <span>Operacional <strong>40%</strong></span>
+        <span>Espec/Coord <strong>51%</strong></span>
+        <span>Gerentes <strong>60%</strong></span>
+        <span>Heads <strong>68%</strong></span>
+        <span>Diretores <strong>81%</strong></span>
+        <span>VPs e CEO <strong>100%</strong></span>
       </div>
     </div>
 
-    <!-- Engajamento com Conteúdos (NOVA SEÇÃO) -->
+    <!-- Engajamento com os Conteúdos -->
     <div class="subsection-title">Engajamento com os Conteúdos</div>
-    <div class="kpi-row kpi-row-4">
-      <div class="kpi-card">
-        <div class="num navy">6.320</div>
-        <div class="label">Acessos ao Portal</div>
+    <div class="eng-grid">
+      <div class="eng-card">
+        <div class="eng-num">6.320</div>
+        <div class="eng-label">Acessos ao Portal</div>
       </div>
-      <div class="kpi-card">
-        <div class="num navy">1.525</div>
-        <div class="label">Acessos Alli</div>
+      <div class="eng-card">
+        <div class="eng-num">1.525</div>
+        <div class="eng-label">Acessos Alli</div>
       </div>
-      <div class="kpi-card">
-        <div class="num navy">300</div>
-        <div class="label">Acessos Feira Online</div>
+      <div class="eng-card">
+        <div class="eng-num">300</div>
+        <div class="eng-label">Acessos Feira Online</div>
       </div>
-      <div class="kpi-card">
-        <div class="num navy">250</div>
-        <div class="label">Acessos Feira Benefícios</div>
+      <div class="eng-card">
+        <div class="eng-num">250</div>
+        <div class="eng-label">Acessos Feira Benefícios</div>
       </div>
     </div>
 
@@ -845,7 +620,7 @@
 </div>
 
 <!-- ══ SEÇÃO 2 — PESQUISA DE BENEFÍCIOS 2026 ══════════════════════ -->
-<div class="section s-pesquisa">
+<div class="section s-pesquisa" id="s-pesquisa">
   <div class="section-header">
     <div>
       <div class="tag">Seção 2</div>
@@ -855,29 +630,28 @@
   </div>
   <div class="section-body">
 
-    <!-- Big Numbers -->
+    <!-- KPIs -->
     <div class="kpi-row kpi-row-3">
       <div class="kpi-card">
         <div class="num red">27%</div>
         <div class="label">Taxa de Resposta</div>
-        <div class="delta">▲ 6pp vs 2025 (21%)</div>
+        <div class="sub">▲ 6pp vs 2025 (21%)</div>
       </div>
       <div class="kpi-card">
         <div class="num red">93%</div>
         <div class="label">NPS Modelo Flexível</div>
-        <div class="delta">▲ 2pp vs 2025 (91%)</div>
+        <div class="sub">▲ 2pp vs 2025 (91%)</div>
       </div>
       <div class="kpi-card">
         <div class="num red">86%</div>
         <div class="label">NPS Pacote Benefícios</div>
-        <div class="delta">▲ 2pp vs 2025 (84%)</div>
+        <div class="sub">▲ 2pp vs 2025 (84%)</div>
       </div>
     </div>
 
-    <!-- Participação por geração -->
+    <!-- Participação por Geração -->
     <div class="subsection-title">Participação na Pesquisa por Geração</div>
-    <table class="compact-table" style="margin-bottom: 10px;">
-      <caption>Distribuição geracional dos FoodLovers e participação na pesquisa</caption>
+    <table class="compact-table">
       <thead>
         <tr>
           <th>Geração</th>
@@ -894,82 +668,73 @@
       </tbody>
     </table>
 
-    <!-- Ranking O que os FoodLovers mais valorizam -->
+    <!-- O que os FoodLovers mais valorizam -->
+    <div class="subsection-title">O que os FoodLovers mais valorizam — Benefícios Essenciais</div>
     <div class="vrank-wrap">
-      <div class="vrank-header">O que os FoodLovers mais valorizam — Benefícios Essenciais</div>
-      <div class="vrank-sublabel-row"><span class="vrank-sublabel">Compulsórios</span><span class="vrank-sublabel">Opcionais</span></div>
-      <div class="vrank-layout">
-        <!-- Col esquerda: top 5 em destaque -->
-        <div class="vrank-col-left">
-          <div class="vrank-card">
-            <div class="vrank-icon"></div>
-            <div class="vrank-pct-badge">
-              <span class="vrank-arrow">▲</span>
-              <span class="vrank-pct-num">90%</span>
-            </div>
-            <div class="vrank-card-name">Plano de Saúde<br><span class="vrank-card-sub">2025: 79%</span></div>
+      <div class="vrank-cols">
+        <!-- Coluna esquerda: compulsórios (highlight salmon) -->
+        <div>
+          <span class="vrank-sublabel compulsorio" style="display:inline-block;margin-bottom:5px;">Compulsórios</span>
+          <div class="vrank-item highlight">
+            <span class="vrank-pct red">90%</span>
+            <span class="vrank-name">Plano de Saúde</span>
+            <span class="vrank-delta">▲ 2025: 79%</span>
           </div>
-          <div class="vrank-card">
-            <div class="vrank-icon"></div>
-            <div class="vrank-pct-badge">
-              <span class="vrank-arrow">▲</span>
-              <span class="vrank-pct-num">89%</span>
-            </div>
-            <div class="vrank-card-name">VA / VR<br><span class="vrank-card-sub">2025: 78%</span></div>
+          <div class="vrank-item highlight">
+            <span class="vrank-pct red">89%</span>
+            <span class="vrank-name">VA / VR</span>
+            <span class="vrank-delta">▲ 2025: 78%</span>
           </div>
-          <div class="vrank-card">
-            <div class="vrank-icon"></div>
-            <div class="vrank-pct-badge">
-              <span class="vrank-arrow">▲</span>
-              <span class="vrank-pct-num">55%</span>
-            </div>
-            <div class="vrank-card-name">Plano Odontológico<br><span class="vrank-card-sub">2025: 48%</span></div>
+          <div class="vrank-item highlight">
+            <span class="vrank-pct red">55%</span>
+            <span class="vrank-name">Plano Odontológico</span>
+            <span class="vrank-delta">▲ 2025: 48%</span>
           </div>
-          <div class="vrank-card">
-            <div class="vrank-icon"></div>
-            <div class="vrank-pct-badge">
-              <span class="vrank-arrow">▲</span>
-              <span class="vrank-pct-num">54%</span>
-            </div>
-            <div class="vrank-card-name">Seguro de Vida<br><span class="vrank-card-sub">2025: 48%</span></div>
+          <div class="vrank-item highlight">
+            <span class="vrank-pct red">54%</span>
+            <span class="vrank-name">Seguro de Vida</span>
+            <span class="vrank-delta">▲ 2025: 48%</span>
           </div>
         </div>
-        <!-- Col direita: opcionais (plain) -->
-        <div class="vrank-col-right">
-          <div class="vrank-plain">
-            <span class="vrank-plain-pct">27%</span>
-            <div class="vrank-plain-icon"></div>
-            <span class="vrank-plain-name">Mobilidade<span class="vrank-plain-sub">2025: 24% ▲</span></span>
+        <!-- Coluna direita: opcionais (plain) -->
+        <div>
+          <span class="vrank-sublabel opcional" style="display:inline-block;margin-bottom:5px;">Opcionais</span>
+          <div class="vrank-item">
+            <span class="vrank-pct">39%</span>
+            <span class="vrank-name">Carteira Flex</span>
+            <span class="vrank-delta">▲ 2025: 38%</span>
           </div>
-          <div class="vrank-plain">
-            <span class="vrank-plain-pct">26%</span>
-            <div class="vrank-plain-icon"></div>
-            <span class="vrank-plain-name">Farmácia<span class="vrank-plain-sub">2025: 23% ▲</span></span>
+          <div class="vrank-item">
+            <span class="vrank-pct">27%</span>
+            <span class="vrank-name">Mobilidade</span>
+            <span class="vrank-delta">▲ 2025: 24%</span>
           </div>
-          <div class="vrank-plain">
-            <span class="vrank-plain-pct">21%</span>
-            <div class="vrank-plain-icon"></div>
-            <span class="vrank-plain-name">Plano Pet<span class="vrank-plain-sub">2025: 19% ▲</span></span>
+          <div class="vrank-item">
+            <span class="vrank-pct">26%</span>
+            <span class="vrank-name">Farmácia</span>
+            <span class="vrank-delta">▲ 2025: 23%</span>
           </div>
-          <div class="vrank-plain">
-            <span class="vrank-plain-pct">19%</span>
-            <div class="vrank-plain-icon"></div>
-            <span class="vrank-plain-name">Cultura<span class="vrank-plain-sub">2025: 19% =</span></span>
+          <div class="vrank-item">
+            <span class="vrank-pct">21%</span>
+            <span class="vrank-name">Plano Pet</span>
+            <span class="vrank-delta">▲ 2025: 19%</span>
+          </div>
+          <div class="vrank-item">
+            <span class="vrank-pct">19%</span>
+            <span class="vrank-name">Cultura</span>
+            <span class="vrank-delta">= 2025: 19%</span>
           </div>
         </div>
       </div>
-      <div class="vrank-legend">
-        <span><span style="color:#1A7A3B;font-weight:900;font-size:8px;">▲</span> Aumentou</span>
-        <span><span style="color:var(--muted);font-weight:900;font-size:8px;">=</span> Se manteve</span>
-        <span class="vrank-footnote">% de respondentes que mencionaram o benefício · critério uniforme 2025 e 2026</span>
-      </div>
+      <div class="vrank-legend">▲ Aumentou &nbsp;|&nbsp; = Se manteve</div>
+      <div class="vrank-footnote">% de respondentes que mencionaram o benefício · critério uniforme 2025 e 2026</div>
     </div>
 
   </div>
 </div>
 
 <!-- ══ SEÇÃO 3 — SAÚDE iDOC 2026 ══════════════════════════════════ -->
-<div class="section s-saude">
+<div class="section s-saude" id="s-saude">
   <div class="section-header">
     <div>
       <div class="tag">Seção 3</div>
@@ -979,8 +744,13 @@
   </div>
   <div class="section-body">
 
-    <!-- Big Numbers -->
-    <div class="kpi-row kpi-row-2">
+    <!-- KPIs laranja -->
+    <div class="kpi-row kpi-row-3">
+      <div class="kpi-card">
+        <div class="num orange">24%</div>
+        <div class="label">FoodLovers respondentes</div>
+        <div class="sub">1.790 FoodLovers</div>
+      </div>
       <div class="kpi-card">
         <div class="num orange">94%</div>
         <div class="label">Informaram nota acima de 7/10</div>
@@ -993,7 +763,7 @@
       </div>
     </div>
 
-    <!-- Utilização iDOC -->
+    <!-- Utilização iDoc -->
     <div class="subsection-title">Utilização iDoc</div>
     <div class="kpi-row kpi-row-2">
       <div class="kpi-card">
@@ -1008,50 +778,50 @@
       </div>
     </div>
 
-    <!-- Ranking Prioridades iDOC -->
+    <!-- O que os FoodLovers mais priorizam — Saúde iDoc -->
+    <div class="subsection-title">O que os FoodLovers mais priorizam — Saúde iDoc</div>
     <div class="vrank-wrap">
-      <div class="vrank-header">O que os FoodLovers mais priorizam — Saúde iDoc</div>
-      <div class="vrank-layout">
-        <!-- Col esquerda: top 3 em destaque -->
-        <div class="vrank-col-left">
-          <div class="vrank-card green">
-            <div class="vrank-icon orange"></div>
-            <div class="vrank-pct-badge">
-              <span class="vrank-pct-num" style="color:#B35A10;">11%</span>
-            </div>
-            <div class="vrank-card-name">Plataforma de Psicologia<br><span class="vrank-card-sub">Vittude</span></div>
+      <div class="vrank-cols">
+        <!-- Coluna esquerda: verde claro, % laranja escuro -->
+        <div>
+          <div class="vrank-item highlight-green">
+            <span class="vrank-pct orange">11%</span>
+            <span class="vrank-name">Plataforma de Psicologia (Vittude)</span>
           </div>
-          <div class="vrank-card green">
-            <div class="vrank-icon orange"></div>
-            <div class="vrank-pct-badge">
-              <span class="vrank-pct-num" style="color:#B35A10;">10%</span>
-            </div>
-            <div class="vrank-card-name">Telemedicina</div>
+          <div class="vrank-item highlight-green">
+            <span class="vrank-pct orange">10%</span>
+            <span class="vrank-name">Telemedicina</span>
           </div>
-          <div class="vrank-card green">
-            <div class="vrank-icon orange"></div>
-            <div class="vrank-pct-badge">
-              <span class="vrank-pct-num" style="color:#B35A10;">9%</span>
-            </div>
-            <div class="vrank-card-name">Vacina da Gripe</div>
+          <div class="vrank-item highlight-green">
+            <span class="vrank-pct orange">9%</span>
+            <span class="vrank-name">Vacina da Gripe</span>
+          </div>
+          <div class="vrank-item highlight-green">
+            <span class="vrank-pct orange">8%</span>
+            <span class="vrank-name">Acomp. Nutricional</span>
           </div>
         </div>
-        <!-- Col direita: demais -->
-        <div class="vrank-col-right">
-          <div class="vrank-plain">
-            <span class="vrank-plain-pct">8%</span>
-            <div class="vrank-plain-icon orange"></div>
-            <span class="vrank-plain-name">Acomp. Nutricional</span>
+        <!-- Coluna direita: plain -->
+        <div>
+          <div class="vrank-item">
+            <span class="vrank-pct">8%</span>
+            <span class="vrank-name">Psicólogos</span>
           </div>
-          <div class="vrank-plain">
-            <span class="vrank-plain-pct">8%</span>
-            <div class="vrank-plain-icon orange"></div>
-            <span class="vrank-plain-name">Psicólogos</span>
+          <div class="vrank-item">
+            <span class="vrank-pct">8%</span>
+            <span class="vrank-name">Pronto Atend. Virtual</span>
           </div>
-          <div class="vrank-plain">
-            <span class="vrank-plain-pct">8%</span>
-            <div class="vrank-plain-icon orange"></div>
-            <span class="vrank-plain-name">Pronto Atend. Virtual</span>
+          <div class="vrank-item">
+            <span class="vrank-pct">7%</span>
+            <span class="vrank-name">Smart Checkup</span>
+          </div>
+          <div class="vrank-item">
+            <span class="vrank-pct">6%</span>
+            <span class="vrank-name">iFamily · Prog. Gestantes</span>
+          </div>
+          <div class="vrank-item">
+            <span class="vrank-pct">4%</span>
+            <span class="vrank-name">Médicos</span>
           </div>
         </div>
       </div>
@@ -1061,8 +831,8 @@
   </div>
 </div>
 
-<!-- ══ SEÇÃO 4 — FEIRA DE BENEFÍCIOS — Jun/2026 ════════════════════ -->
-<div class="section s-feira">
+<!-- ══ SEÇÃO 4 — FEIRA DE BENEFÍCIOS — Jun/2026 ══════════════════ -->
+<div class="section s-feira" id="s-feira">
   <div class="section-header">
     <div>
       <div class="tag">Seção 4</div>
@@ -1072,6 +842,7 @@
   </div>
   <div class="section-body">
 
+    <!-- KPIs linha 1 -->
     <div class="kpi-row kpi-row-3">
       <div class="kpi-card">
         <div class="num navy">550</div>
@@ -1087,23 +858,24 @@
       </div>
     </div>
 
+    <!-- KPIs linha 2 -->
     <div class="kpi-row kpi-row-2">
       <div class="kpi-card">
-        <div class="num orange">33</div>
-        <div class="label">Iniciaram Adesão Previdência Privada</div>
+        <div class="num orange">305</div>
+        <div class="label">Interessados imediatos Previdência Privada Stay</div>
       </div>
       <div class="kpi-card">
-        <div class="num navy">9</div>
-        <div class="label">Ativações Credencial Pais e Avós</div>
+        <div class="num navy">~150</div>
+        <div class="label">Interessados imediatos na Credencial Saúde Pais e Avós</div>
       </div>
     </div>
 
   </div>
 </div>
 
-<!-- ══ RODAPÉ ═══════════════════════════════════════════════════════ -->
+<!-- ══ RODAPÉ ════════════════════════════════════════════════════ -->
 <footer>
-  <div class="conf">Confidencial · Benefícios | People · iFood · Jun/2026</div>
+  <div class="conf">🔒 Confidencial · Benefícios | People · iFood · Jun/2026</div>
   <div>Snapshot: 23/06/2026 · Dados: Eleição 2026, Pesquisa Benefícios 2026, Saúde iDoc 2026</div>
 </footer>
 
